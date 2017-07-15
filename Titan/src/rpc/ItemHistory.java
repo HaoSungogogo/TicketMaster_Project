@@ -42,9 +42,7 @@ public class ItemHistory extends HttpServlet {
 					String eventId = (String) array.get(i);
 					visitedEvents.add(eventId);
 				}
-
-                                                         // TODO: logic to process visitedEvents
-
+				// TODO: logic to process visitedEvents
 				RpcHelper.writeJsonObject(response,
 						new JSONObject().put("status", "OK"));
 			} else {

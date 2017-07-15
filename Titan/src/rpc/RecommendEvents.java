@@ -1,9 +1,6 @@
 package rpc;
 
-import java.util.*;
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,21 +11,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import entity.Item;
-import external.ExternalAPI;
-import external.ExternalAPIFactory;
-
 /**
- * Servlet implementation class SearchItem
+ * Servlet implementation class RecommendEvents
  */
-@WebServlet("/search")
-public class SearchItem extends HttpServlet {
+@WebServlet("/recommendation")
+public class RecommendEvents extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchItem() {
+    public RecommendEvents() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,25 +30,24 @@ public class SearchItem extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		double lat = Double.parseDouble(request.getParameter("lat"));
-		double lon = Double.parseDouble(request.getParameter("lon"));
-		// Term can be empty or null.
-		String term = request.getParameter("term");
-		ExternalAPI externalAPI = ExternalAPIFactory.getExternalAPI();
-		List<Item> items = externalAPI.search(lat, lon, term);
-		List<JSONObject> list = new ArrayList<>();
+		JSONArray array = new JSONArray();
 		try {
-			for (Item item : items) {
-				// Add a thin version of item object
-				JSONObject obj = item.toJSONObject();
-				list.add(obj);
-			}
-		} catch (Exception e) {
+			 if (request.getParameter("user_id") != null) {
+		   		JSONObject o1 = new JSONObject();
+		   		JSONObject o2 = new JSONObject();
+		   		o1.put("name", "panda express");
+		   		o1.put("location", "downtown");
+		   		o1.put("country", "united states");
+		   		o2.put("name", "hongkong express");
+		   		o2.put("location", "uptown");
+		   		o2.put("country", "united states");
+		   		array.put(o1);
+		   		array.put(o2);
+		   	 }
+		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		JSONArray array = new JSONArray(list);
 		RpcHelper.writeJsonArray(response, array);
-
 	}
 
 	/**
