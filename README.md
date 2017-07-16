@@ -68,4 +68,58 @@ JSON only allow key names to be String
 JSON array: ["John": "Jack", "Mary": "Bob"]
 
 
+The structure of our project
+
+src/
+rpc/
+The entry point of our project, handles rpc request/response, parsing, etc.
+SearchItem.java
+RecommendItem.java
+ItemHistory.java
+RpcHelper.java
+Question: How do we design it?
+db/
+The ‘backend’ of our project, connects to database.
+DBConnection.java is an interface. We have two implementations (MySQL vs. MongoDB)
+DbConnectionFactory.java is a factory class.
+mysql/
+mongodb/
+Question: How do we design it?
+externel/ 
+Another ‘backend’ of our project, connects to public APIs.
+ExternalAPI.java is an interface. All supported backends should implement it.
+ExternalAPIFactory.java is a factory class.
+TicketMasterAPI.java. ‘Backend’ of our project, connects to TicketMaster API.
+Question: How do we design it?
+entity/ 
+Handles creation/conversion/etc of object instances. 
+Item.java
+algorithm/ 
+Adds event recommendation algorithms.
+GeoRecommendation.java
+Recommendation.java
+
+Factory Pattern
+
+In Factory pattern, we create object without exposing the creation logic to client and the client use the same common interface to create new type of object.
+The idea is to use a static member-function (static factory method) which creates & returns instances, hiding the details of class modules from user.
+
+Builder Pattern
+
+Builder pattern builds a complex object using simple objects and using a step by step approach. It separates the construction of a complex object from its representation so that the same construction process can create different representations. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
