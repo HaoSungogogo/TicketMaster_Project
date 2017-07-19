@@ -1,3 +1,4 @@
+
 package rpc;
 
 import java.io.IOException;
@@ -41,7 +42,21 @@ public class ItemHistory extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	}
+   String userId = request.getParameter("user_id");
+   Set<Item> items = conn.getFavoriteItems(userId);
+   JSONArray array = new JSONArray();
+   for (Item item : items) {
+     JSONObject obj = item.toJSONObject();
+     try {
+       obj.append("favorite", true);
+     } catch (JSONException e) {
+       e.printStackTrace();
+     }
+     array.put(obj);
+   }
+   RpcHelper.writeJsonArray(response, array);
+}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -53,7 +68,7 @@ public class ItemHistory extends HttpServlet {
 			JSONObject input = RpcHelper.readJsonObject(request);
 			String userId = input.getString("user_id");
 			JSONArray array = (JSONArray) input.get("favorite");
-
+			System.out.println("debug1");
 			List<String> histories = new ArrayList<>();
 			for (int i = 0; i < array.length(); i++) {
 				String itemId = (String) array.get(i);
@@ -65,13 +80,30 @@ public class ItemHistory extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+	
+	
 
 	/**
 	 * @see HttpServlet#doDelete(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+				throws ServletException, IOException {
+	   try {
+	     JSONObject input = RpcHelper.readJsonObject(request);
+	     String userId = input.getString("user_id");
+	     JSONArray array = (JSONArray) input.get("favorite");
 
+	     List<String> histories = new ArrayList<>();
+	     for (int i = 0; i < array.length(); i++) {
+	       String itemId = (String) array.get(i);
+	       histories.add(itemId);
+	     }
+	     conn.unsetFavoriteItems(userId, histories);
+	     RpcHelper.writeJsonObject(response, new JSONObject().put("result", "SUCCESS"));
+	   } catch (JSONException e) {
+	     e.printStackTrace();
+	   }
 	}
 }
