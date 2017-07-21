@@ -149,6 +149,8 @@ Type:
 Collaborative Filter
 
 Titan is Content-based Recommendation System.
+In this project, we would like to recommend events based on categories that the user has visited. 
+
 
 
 
