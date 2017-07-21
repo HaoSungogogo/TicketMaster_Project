@@ -109,13 +109,16 @@ Builder Pattern
 Builder pattern builds a complex object using simple objects and using a step by step approach. It separates the construction of a complex object from its representation so that the same construction process can create different representations. 
 
 MAMP
+
 MAMP is an integrated platform you can install on your machine which allows you to have access to a local MySQL server and its PHP server. 
 
 JDBC
+
 JDBC provides interfaces and classes for writing database operations.
 It is a standard API that defines how Java programs access database management systems. 
 
 Singleton Pattern
+
 The singleton pattern is a design pattern that restricts the instantiation of a class to one object.
 
 public class MySQLConnection implements DBConnection {
@@ -132,6 +135,20 @@ public class MySQLConnection implements DBConnection {
 Sometimes we need to have only one instance of our class. We know that creating DB connections are costly. In Titan, a single DB connection is shared by multiple queries. There are other use cases. For example, there can be a single configuration manager or error manager in an application that handles all problems instead of creating multiple managers.
 
 
+Recommendation System
+
+Three components
+1. User profile
+2. Item profile
+3. Review/History/User behavior -> like review, evaluation, comment ets.
+
+Type:
+1. Demographic-based Recommendation -> recommend items that users similar to you like. 
+2. Content-based Recommendation. ->  recommend items that are similar to what you liked before. 
+
+Collaborative Filter
+
+Titan is Content-based Recommendation System.
 
 
 
