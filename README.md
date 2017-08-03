@@ -152,6 +152,35 @@ Titan is Content-based Recommendation System.
 In this project, we would like to recommend events based on categories that the user has visited. 
 
 
+Nosql and MongoDB
+distributed 
+agile (去模式化) and schema less
+
+
+Nosql 
+Large volumes of rapidly changing structured, semi-structured, and unstructured data
+Agile sprints, quick schema iteration, and frequent code pushes
+Object-oriented programming that is easy to use and flexible
+Geographically distributed scale-out architecture instead of expensive, monolithic architecture
+
+Nosql data type
+1. Document
+	each key with a complex data structure
+	MongoDB -> json(key, value pair)
+2. Graph
+
+Nosql limits:
+Lack of efficient join operation
+Not suitable for business transaction application
+Consistent issue.
+
+SQL    				MongoDB
+Table   			Collection
+Row					Documents
+Column 				Field
+join  				Not support
+
+
 
 
 
